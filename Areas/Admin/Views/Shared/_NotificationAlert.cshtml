@@ -1,0 +1,44 @@
+﻿@if (TempData["success"] != null)
+{
+
+    <script src="~/assets/admin/js/jquery/jquery.min.js"></script>
+    <script src="
+https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js
+        "></script>
+    <link href="
+https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css
+        " rel="stylesheet">
+    <script type="text/javascript">
+
+        toastr.success('@TempData["success"]');
+    </script>
+
+}
+@if (TempData["Failed"] != null)
+{
+    <script src="~/assets/admin/js/jquery/jquery.min.js"></script>
+    <script src="
+https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js
+        "></script>
+    <link href="
+https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css
+        " rel="stylesheet">
+    <script type="text/javascript">
+        toastr.error('@TempData["Failed"]');
+    </script>
+
+}
+@if (TempData["warning"] != null)
+{
+    <script src="~/assets/admin/js/jquery/jquery.min.js"></script>
+    <script src="
+https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js
+        "></script>
+    <link href="
+https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css
+        " rel="stylesheet">
+    <script type="text/javascript">
+        toastr.error('@TempData["warning"]');
+    </script>
+
+}

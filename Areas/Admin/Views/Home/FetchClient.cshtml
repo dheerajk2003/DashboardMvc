@@ -1,0 +1,69 @@
+﻿@model List<HomeProjectCore.Areas.Admin.Models.ClientModel>
+@{
+    Layout = "_adminLayout";
+}
+
+
+<!-- Hover table card start -->
+<div class="card">
+    <div class="card-header">
+        <h5>Client List</h5>
+        @* <span>use class <code>table-hover</code> inside table element</span> *@
+        <div class="card-header-right">
+            <ul class="list-unstyled card-option">
+                <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                <li><i class="fa fa-window-maximize full-card"></i></li>
+                <li><i class="fa fa-minus minimize-card"></i></li>
+                <li><i class="fa fa-refresh reload-card"></i></li>
+                <li><i class="fa fa-trash close-card"></i></li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="col-1 float-right">
+            <a asp-action="ExportToExcel" asp-controller="Home">
+                <i class="fa fa-2x fa-download"></i>
+            </a>
+            &nbsp;&nbsp;
+            <a href="#">
+                <i class="fa fa-2x fa-print"></i>
+            </a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Client Id</th>
+                        <th>Client Name</th>
+                        <th>E-Mail</th>
+                        <th>Contact</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var data in Model)
+                    {
+                        <tr>
+                            <th scope="row">@data.ClientId</th>
+                            <td>@data.ClientName</td>
+                            <td>@data.ClientEmail</td>
+                            <td>@data.ClientContact</td>
+                            <td>@data.ClientPassword</td>
+                            <td>
+                                <a href="#">
+                                    <i class="fa fa-2x fa-edit text-primary"></i>
+                                </a>
+                                <span class="m-10"></span>
+                                <a href="Delete?id=@data.ClientId" onclick="return confirm('Are you sure to delete?')">
+                                    <i class="fa fa-2x fa-trash text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Hover table card end -->
