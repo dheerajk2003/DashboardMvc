@@ -9,7 +9,7 @@ namespace HomeProjectCore.AppData
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet<ClientModel> ClientModel { get; set; }
+        public DbSet<ClientModel> ClientTable { get; set; }
         public DbSet<InvestorModel> InvestorTable { get; set; }
         public DbSet<FundModel> FundTable { get; set; }
     }

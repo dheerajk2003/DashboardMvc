@@ -17,8 +17,12 @@ namespace HomeProjectCore.Areas.Admin.Models
         public string? ClientContact { get; set; }
         public string? ClientContactA { get; set; }
         public string? ClientLogo { get; set; }
-        public DateTime ClientDate { get; set; }
-
+        public string? ClientDate { get; set; }
         public int ClientActive { get; set; }
+        public int ClientAddedBy { get; set; }
+        public int ClientIsReviewed { get; set; } = 0;
+        public int ClientReviewedBy { get; set; }
+        public DateTime ClientReviewedOn { get; set; }
+
     }
 }

@@ -37,11 +37,11 @@ namespace HomeProjectCore.Areas.Admin.Controllers
                 clientModel.ClientEmail = client.ClientEmail;
                 clientModel.ClientLogo = client.ClientLogo;
                 clientModel.ClientPassword = Guid.NewGuid().ToString().Substring(0, 8);
-                clientModel.ClientDate = System.DateTime.Now;
+                clientModel.ClientDate = (DateTime.Now).ToString();
                 clientModel.ClientActive = 1;
 
 
-                _context.ClientModel.Add(clientModel);
+                _context.ClientTable.Add(clientModel);
                 await _context.SaveChangesAsync();
                 ModelState.Clear();
                 TempData["success"] = "Candidate Registered Successfully";
@@ -53,9 +53,17 @@ namespace HomeProjectCore.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<List<ClientModel>>> FetchClient()
+        public IActionResult FetchClient()
         {
-             return View( await _context.ClientModel.ToListAsync());
+            try
+            {
+                return View(_context.ClientTable.ToList());
+            }
+            catch(Exception ex)
+            {
+                Console.Write(ex.ToString());
+                return RedirectToAction("Index");
+            }
         }
 
         public IActionResult AddClient()
@@ -65,7 +73,7 @@ namespace HomeProjectCore.Areas.Admin.Controllers
 
         public IActionResult AddInvestor()
         {
-            var Clients = _context.ClientModel.Select(u => new ClientModel { ClientId = u.ClientId, ClientName = u.ClientName }).ToList();
+            var Clients = _context.ClientTable.Select(u => new ClientModel { ClientId = u.ClientId, ClientName = u.ClientName }).ToList();
             var Funds = _context.FundTable.Select(u => new FundModel { FundId = u.FundId, FundName = u.FundName }).ToList();
 
             //List<List<object>> tList = new List<List<object>>();
@@ -107,11 +115,11 @@ namespace HomeProjectCore.Areas.Admin.Controllers
             // var id = Request.Form["applicantId"].ToString();
            // var t = ViewBag.applicationID;
             //var newId = fc["Id"];
-            var st = await _context.ClientModel.SingleOrDefaultAsync(x => x.ClientId== id);
+            var st = await _context.ClientTable.SingleOrDefaultAsync(x => x.ClientId== id);
             if (st != null)
             {
 
-                _context.ClientModel.Remove(st);
+                _context.ClientTable.Remove(st);
                 _context.SaveChanges();
                 TempData["warning"] = "Client Deleted Successfully";
                 return RedirectToAction("FetchClient", "Home");
